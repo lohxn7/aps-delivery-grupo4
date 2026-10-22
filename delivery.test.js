@@ -29,3 +29,21 @@ describe('F1 - autenticar', () => {
     expect(autenticar(usuarios, 'bruno@delivery.com', 'Bruno#2024')).toBe(false);
   });
 });
+
+describe('F2 - forcaSenha', () => {
+  test('CT-05: senha com menos de 8 caracteres é fraca', () => {
+    expect(forcaSenha('Ab1')).toBe('fraca');
+  });
+
+  test('CT-06: 8 caracteres só com dígitos é media', () => {
+    expect(forcaSenha('12345678')).toBe('media');
+  });
+
+  test('CT-07: 8 caracteres com minúsculas e maiúsculas é media', () => {
+    expect(forcaSenha('Abcdefgh')).toBe('media');
+  });
+
+  test('CT-08: 8 caracteres com os 4 tipos é forte', () => {
+    expect(forcaSenha('Abcdef1!')).toBe('forte');
+  });
+});

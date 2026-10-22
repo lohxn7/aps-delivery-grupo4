@@ -10,7 +10,19 @@ function autenticar(usuarios, email, senha) {
   return usuario.ativo === true;
 }
 
-function forcaSenha(senha) {}
+function forcaSenha(senha) {
+  if (senha.length < 8) return 'fraca';
+
+  // conta quantos tipos diferentes de caractere a senha tem
+  let tipos = 0;
+  if (/[a-z]/.test(senha)) tipos++;
+  if (/[A-Z]/.test(senha)) tipos++;
+  if (/[0-9]/.test(senha)) tipos++;
+  if (/[^a-zA-Z0-9]/.test(senha)) tipos++;
+
+  return tipos >= 3 ? 'forte' : 'media';
+}
+
 function podeLogar(usuario) {}
 function calcularFrete(distanciaKm) {}
 function aplicarCupom(valor, cupom) {}
