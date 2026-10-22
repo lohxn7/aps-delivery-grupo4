@@ -47,3 +47,21 @@ describe('F2 - forcaSenha', () => {
     expect(forcaSenha('Abcdef1!')).toBe('forte');
   });
 });
+
+describe('F3 - podeLogar', () => {
+  test('CT-09: usuário ativo sem falhas pode logar', () => {
+    expect(podeLogar({ status: 'ativo', falhas: 0 })).toBe(true);
+  });
+
+  test('CT-10: usuário ativo com 2 falhas ainda pode logar', () => {
+    expect(podeLogar({ status: 'ativo', falhas: 2 })).toBe(true);
+  });
+
+  test('CT-11: com 3 falhas a conta fica bloqueada', () => {
+    expect(podeLogar({ status: 'ativo', falhas: 3 })).toBe(false);
+  });
+
+  test('CT-12: usuário com status bloqueado não pode logar', () => {
+    expect(podeLogar({ status: 'bloqueado', falhas: 0 })).toBe(false);
+  });
+});

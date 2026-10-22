@@ -23,7 +23,11 @@ function forcaSenha(senha) {
   return tipos >= 3 ? 'forte' : 'media';
 }
 
-function podeLogar(usuario) {}
+function podeLogar(usuario) {
+  // é < e não <= porque na 3ª falha a conta já fica bloqueada
+  return usuario.status === 'ativo' && usuario.falhas < 3;
+}
+
 function calcularFrete(distanciaKm) {}
 function aplicarCupom(valor, cupom) {}
 
