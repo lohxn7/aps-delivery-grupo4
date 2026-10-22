@@ -1,55 +1,62 @@
-// DeliveryExpress - regras de login, senha, frete e cupom
-
 function autenticar(usuarios, email, senha) {
-  const usuario = usuarios.find((u) => u.email === email);
-
-  if (!usuario) return false;
-  if (usuario.senha !== senha) return false;
-
-  // conta desativada não entra, mesmo acertando a senha
-  return usuario.ativo === true;
+  for (const u of usuarios) {
+    if (u.email === email && u.senha === senha && u.ativo) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function forcaSenha(senha) {
-  if (senha.length < 8) return 'fraca';
+  if (senha.length < 8) {
+    return 'fraca';
+  }
 
-  // conta quantos tipos diferentes de caractere a senha tem
   let tipos = 0;
   if (/[a-z]/.test(senha)) tipos++;
   if (/[A-Z]/.test(senha)) tipos++;
   if (/[0-9]/.test(senha)) tipos++;
-  if (/[^a-zA-Z0-9]/.test(senha)) tipos++;
+  if (/[^a-zA-Z0-9]/.test(senha)) tipos++; // simbolo
 
-  return tipos >= 3 ? 'forte' : 'media';
+  if (tipos >= 3) {
+    return 'forte';
+  }
+  return 'media';
 }
 
 function podeLogar(usuario) {
-  // é < e não <= porque na 3ª falha a conta já fica bloqueada
-  return usuario.status === 'ativo' && usuario.falhas < 3;
+  if (usuario.status !== 'ativo') {
+    return false;
+  }
+  return usuario.falhas < 3; // com 3 falhas ja bloqueia
 }
 
 function calcularFrete(distanciaKm) {
   if (distanciaKm <= 0) {
     throw new Error('Distância inválida');
   }
-
-  const taxaFixa = 5;
-  if (distanciaKm <= 3) return taxaFixa;
-
-  const kmExcedente = distanciaKm - 3;
-  return taxaFixa + kmExcedente * 1.5;
+  if (distanciaKm <= 3) {
+    return 5;
+  }
+  return 5 + (distanciaKm - 3) * 1.5;
 }
 
 function aplicarCupom(valor, cupom) {
-  if (!cupom) return valor; // pega null, undefined e ''
+  if (!cupom) {
+    return valor;
+  }
 
   let desconto;
-  if (cupom === 'PRIMEIRA10') desconto = 0.1;
-  else if (cupom === 'VIP20') desconto = 0.2;
-  else throw new Error('Cupom inválido');
+  if (cupom === 'PRIMEIRA10') {
+    desconto = 10;
+  } else if (cupom === 'VIP20') {
+    desconto = 20;
+  } else {
+    throw new Error('Cupom inválido');
+  }
 
-  const valorFinal = valor - valor * desconto;
-  return Math.round(valorFinal * 100) / 100;
+  const total = valor - (valor * desconto) / 100;
+  return Math.round(total * 100) / 100;
 }
 
 module.exports = { autenticar, forcaSenha, podeLogar, calcularFrete, aplicarCupom };
