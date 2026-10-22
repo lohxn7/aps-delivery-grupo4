@@ -65,3 +65,21 @@ describe('F3 - podeLogar', () => {
     expect(podeLogar({ status: 'bloqueado', falhas: 0 })).toBe(false);
   });
 });
+
+describe('F4 - calcularFrete', () => {
+  test('CT-13: entrega a 2 km paga o frete fixo de 5', () => {
+    expect(calcularFrete(2)).toBe(5);
+  });
+
+  test('CT-14: exatamente 3 km continua 5', () => {
+    expect(calcularFrete(3)).toBe(5);
+  });
+
+  test('CT-15: 5 km paga 5 + 2 x 1,50 = 8', () => {
+    expect(calcularFrete(5)).toBe(8);
+  });
+
+  test('CT-16: distância negativa lança erro', () => {
+    expect(() => calcularFrete(-2)).toThrow('Distância inválida');
+  });
+});

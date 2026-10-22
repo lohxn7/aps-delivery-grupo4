@@ -28,7 +28,18 @@ function podeLogar(usuario) {
   return usuario.status === 'ativo' && usuario.falhas < 3;
 }
 
-function calcularFrete(distanciaKm) {}
+function calcularFrete(distanciaKm) {
+  if (distanciaKm <= 0) {
+    throw new Error('Distância inválida');
+  }
+
+  const taxaFixa = 5;
+  if (distanciaKm <= 3) return taxaFixa;
+
+  const kmExcedente = distanciaKm - 3;
+  return taxaFixa + kmExcedente * 1.5;
+}
+
 function aplicarCupom(valor, cupom) {}
 
 module.exports = { autenticar, forcaSenha, podeLogar, calcularFrete, aplicarCupom };
