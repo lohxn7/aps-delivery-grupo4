@@ -2,15 +2,13 @@
 
 Trabalho da disciplina de Teste de Software (UNIFAMETRO) com o Prof. Jonh Sousa.
 
-## Grupo
+## Integrante
 
-- Integrante 1
-- Integrante 2
-- Integrante 3
+- Lôhan do Carmo Macedo Soares
 
 ## Sobre o trabalho
 
-O DeliveryExpress é um sistema de delivery que precisava de testes automatizados antes de ir pra produção. A gente recebeu 20 casos de teste (CT-01 a CT-20), cada um com seu critério de aceitação no formato DADO / QUANDO / ENTÃO, e a missão foi:
+O DeliveryExpress é um sistema de delivery que precisava de testes automatizados antes de ir pra produção. Recebi 20 casos de teste (CT-01 a CT-20), cada um com seu critério de aceitação no formato DADO / QUANDO / ENTÃO, e a missão foi:
 
 1. Escrever os 20 testes no Jest (`delivery.test.js`)
 2. Implementar as 5 funções em `delivery.js` até tudo passar
