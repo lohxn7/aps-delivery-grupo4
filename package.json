@@ -1,0 +1,15 @@
+{
+  "name": "aps-delivery",
+  "version": "1.0.0",
+  "description": "APS de Teste de Software - 20 casos de teste do DeliveryExpress com Jest",
+  "main": "delivery.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
