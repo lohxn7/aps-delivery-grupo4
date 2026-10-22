@@ -40,6 +40,16 @@ function calcularFrete(distanciaKm) {
   return taxaFixa + kmExcedente * 1.5;
 }
 
-function aplicarCupom(valor, cupom) {}
+function aplicarCupom(valor, cupom) {
+  if (!cupom) return valor; // pega null, undefined e ''
+
+  let desconto;
+  if (cupom === 'PRIMEIRA10') desconto = 0.1;
+  else if (cupom === 'VIP20') desconto = 0.2;
+  else throw new Error('Cupom inválido');
+
+  const valorFinal = valor - valor * desconto;
+  return Math.round(valorFinal * 100) / 100;
+}
 
 module.exports = { autenticar, forcaSenha, podeLogar, calcularFrete, aplicarCupom };

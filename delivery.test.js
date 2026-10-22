@@ -83,3 +83,21 @@ describe('F4 - calcularFrete', () => {
     expect(() => calcularFrete(-2)).toThrow('Distância inválida');
   });
 });
+
+describe('F5 - aplicarCupom', () => {
+  test('CT-17: sem cupom o valor não muda', () => {
+    expect(aplicarCupom(80, null)).toBe(80);
+  });
+
+  test('CT-18: PRIMEIRA10 dá 10% de desconto', () => {
+    expect(aplicarCupom(100, 'PRIMEIRA10')).toBe(90);
+  });
+
+  test('CT-19: VIP20 dá 20% de desconto', () => {
+    expect(aplicarCupom(50, 'VIP20')).toBe(40);
+  });
+
+  test('CT-20: cupom que não existe lança erro', () => {
+    expect(() => aplicarCupom(80, 'CUPOM123')).toThrow('Cupom inválido');
+  });
+});
